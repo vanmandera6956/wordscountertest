@@ -1,0 +1,15 @@
+return_list=[]
+frequency={}
+for i in range(len(df)):
+    match_pattern = re.findall(r'\b[a-z]{4,15}\b', df['Comment'][i])
+    for word in match_pattern:
+        count = frequency.get(word,0)
+        frequency[word] = count + 1
+
+        frequency_list = frequency.keys()
+ 
+        for words in frequency_list:
+            temp={'Firm':df['Firm'][i], 'Words':words,'Frequency':frequency[words]}
+            return_list.append(temp)
+            
+Freq=pd.DataFrame(return_list,columns=['Firm','Words','Frequency'])
